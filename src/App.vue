@@ -1,6 +1,15 @@
 <script>
 /* eslint-disable */ 
 import Menu from './components/menu.vue'
+import axios from 'axios'
+
+axios.get('/api/getPackage', { withCredentials: true })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    // 处理错误
+  });
 
 export default {
   name: 'app',
@@ -20,6 +29,7 @@ export default {
 
 <template>
   <div>
+    <h1>123</h1>
     <Menu />
   </div>
     

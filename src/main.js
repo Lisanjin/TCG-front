@@ -7,7 +7,6 @@ import App from './App'
 
 /* eslint-disable */ 
 
-
 Vue.config.productionTip = false
 
 new Vue({
