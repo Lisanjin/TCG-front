@@ -1,36 +1,28 @@
 <script>
 /* eslint-disable */ 
-import Menu from './components/menu.vue'
-import axios from 'axios'
-
-axios.get('/api/getPackage', { withCredentials: true })
-  .then(response => {
-    console.log(response)
-  })
-  .catch(error => {
-    // 处理错误
-  });
-
 export default {
   name: 'app',
-  components: {
-    Menu
+  data () {
+    return {
+      data: 123
+    }
   }
-  
 }
 </script>
 <style>
       body {
         /* 设置背景图片，居中显示，不重复，固定位置 */
-        background: url('./assets/backgroud.png') no-repeat center center fixed; 
+        background: url('./assets/bg1.png') no-repeat center center fixed; 
         background-size: 100% 100%;
       }
 </style>
 
 <template>
   <div>
-    <h1>123</h1>
-    <Menu />
+    <!-- <img src="http://112.124.6.202:8080/cards/100103.png" /> -->
+    <!-- <h1>{{ data }}</h1> -->
+    <!-- <Menu /> -->
+    <router-view></router-view>
+    <!-- <AddStory /> -->
   </div>
-    
 </template>
