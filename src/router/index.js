@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import login from '../components/login.vue'
 import mainPage from '../pages/mainPage.vue'
+import addStory from '../pages/addStory.vue'
 
 Vue.use(VueRouter)
 
@@ -19,6 +20,12 @@ const routes = [
     path: '/main',
     name: 'main',
     component: mainPage,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/addStory',
+    name: 'addStory',
+    component: addStory,
     meta: { requiresAuth: true }
   }
 ]

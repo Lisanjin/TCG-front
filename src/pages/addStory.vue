@@ -1,34 +1,33 @@
 <template>
     <div>
       <form @submit.prevent="submitForm" class="form-container">
+        <label for="storyId">故事id：</label>
+        <input type="text" id="storyId" v-model="storyId" required>
+        <br>
         <label for="storyType">故事类型：</label>
         <select id="storyType" v-model="storyType" required>
           <option value="1">主要</option>
-          <option value="2">选择</option>
-          <option value="3">类型3</option>
-          <option value="4">类型4</option>
+          <option value="2">缩略</option>
+          <option value="3">地点</option>
         </select>
         <br>
         <label for="storyTitle">故事标题：</label>
-        <input type="text" id="storyTitle" v-model="storyTitle" required>
+        <input type="text" id="storyTitle" v-model="storyTitle">
         <br>
         <label for="abbreviatedStory">缩略故事：</label>
-        <textarea id="abbreviatedStory" v-model="abbreviatedStory" required></textarea>
+        <textarea id="abbreviatedStory" v-model="abbreviatedStory"></textarea>
         <br>
         <label for="fullStory">完整故事：</label>
-        <textarea id="fullStory" v-model="fullStory" required></textarea>
+        <textarea id="fullStory" v-model="fullStory"></textarea>
         <br>
         <label for="selectIdList">选择ID列表：</label>
-        <input type="text" id="selectIdList" v-model="selectIdList" required>
+        <input type="text" id="selectIdList" v-model="selectIdList">
         <br>
         <label for="toDo">待办事项：</label>
-        <input type="text" id="toDo" v-model="toDo" required>
+        <input type="text" id="toDo" v-model="toDo">
         <br>
-        <label for="Spare1">备用字段1：</label>
-        <input type="text" id="Spare1" v-model="spare1">
-        <br>
-        <label for="Spare2">备用字段2：</label>
-        <input type="text" id="Spare2" v-model="spare2">
+        <label for="toDo">解锁条件：</label>
+        <input type="text" id="spare1" v-model="spare1">
         <br>
         <button type="submit">提交</button>
       </form>
@@ -41,6 +40,7 @@ import axios from 'axios'
 export default {
   data () {
     return {
+      storyId: '',
       storyType: null,
       storyTitle: '',
       abbreviatedStory: '',
@@ -52,9 +52,20 @@ export default {
     }
   },
   methods: {
+    resetForm () {
+      this.storyId = ''
+      this.storyTitle = ''
+      this.abbreviatedStory = ''
+      this.fullStory = ''
+      this.selectIdList = ''
+      this.toDo = ''
+      this.spare1 = '0'
+      this.spare2 = '0'
+    },
     submitForm () {
       // 构造表单数据
       const formData = new FormData()
+      formData.append('storyId', this.storyId)
       formData.append('storyType', this.storyType)
       formData.append('storyTitle', this.storyTitle)
       formData.append('abbreviatedStory', this.abbreviatedStory)
@@ -70,6 +81,7 @@ export default {
           // 处理成功响应
           console.log(response.data)
           this.resetForm()
+          alert('提交成功')
         })
         .catch(error => {
           // 处理错误响应

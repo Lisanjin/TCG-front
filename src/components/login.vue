@@ -61,7 +61,7 @@ export default {
       axios.get('/api/login', {params: this.loginForm,
         withCredentials: true })
         .then(response => {
-          console.log(response.data.code)
+          console.log(response.data)
           if (response.data.code === 200) {
             localStorage.setItem('token', response.data)
             this.$router.push({ name: 'main' })
@@ -76,12 +76,11 @@ export default {
       axios.get('/api/register', {params: this.registerForm,
         withCredentials: true })
         .then(response => {
-          console.log(response.data.code)
           if (response.data.code === 200) {
             localStorage.setItem('token', response.data)
             this.$router.push({ name: 'main' })
           } else {
-            alert('登录失败')
+            alert('注册失败')
           }
         })
     }
