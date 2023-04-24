@@ -1,12 +1,14 @@
 <template>
     <div>
       <button @click="logout">Logout</button>
-      <Story storyId="1"/>
+      <Story />
     </div>
   </template>
 
 <script>
 import Story from '../components/story.vue'
+import axios from 'axios'
+
 
 export default {
   data () {
@@ -19,6 +21,7 @@ export default {
   },
   methods: {
     logout () {
+      axios.post('/api/loginout')
       localStorage.removeItem('token')
       this.$router.push('/login')
     }
