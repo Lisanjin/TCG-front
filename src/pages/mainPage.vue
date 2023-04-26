@@ -1,6 +1,7 @@
 <template>
     <div>
       <button @click="logout">Logout</button>
+      <!-- <bgm /> -->
       <Story />
     </div>
   </template>
@@ -8,16 +9,13 @@
 <script>
 import Story from '../components/story.vue'
 import axios from 'axios'
+import bgm from '../components/bgm.vue'
 
 
 export default {
-  data () {
-    return {
-      uid: 123
-    }
-  },
   components: {
-    Story
+    Story,
+    bgm
   },
   methods: {
     logout () {

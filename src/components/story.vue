@@ -1,25 +1,43 @@
 <template>
     <div class="mainStoryCard">
-      <p>{{ storyId }}</p>
       <h2>{{ storyTitle }}</h2>
       <p>{{ abbreviatedStory }}</p>
       <p>{{ fullStory }}</p>
-      <p>{{ toDo }}</p>
-      <button v-if="showNextButton" @click="nextStory()">继续</button>
+      <br>
+      <br>
+      <button v-if="showNextButton" @click="nextStory()" class="nextButton">继续</button>
+
+      <div v-for="(select,index) in selectIdList.split(';')" :key="index">
+        <Select :selectId = select />
+      </div>
     </div>
   </template>
 
 <style scoped>
 .mainStoryCard {
-  background-color: #ffffff;
+  position: relative;
+  background-color: #bdb29e;
   padding: 20px;
-  max-width: 400px;
+  max-width: 500px;
   margin: 0 auto;
+  box-shadow:
+    0 0 0 2px #807c75,
+    0 0 0 4px #bdb29e;
+}
+.nextButton{
+  display: inline-block;
+  text-align: center;
+  padding: 8px 16px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  box-shadow: 0 3px 2px 0 rgba(0,0,0,.5);
 }
 </style>
 
 <script>
 import axios from 'axios'
+import Select from '@/components/select.vue'
 
 export default {
   data () {
@@ -34,6 +52,9 @@ export default {
       toDo: null,
       nextStoryId: null
     }
+  },
+  components: {
+    Select
   },
   methods: {
     eventDo (todoList) {
@@ -66,14 +87,25 @@ export default {
           } else {
             this.showNextButton = false
           }
+          if (this.selectIdList !== '') {
+            console.log(this.selectIdList.split(';'))
+          }
         })
         .catch(error => {
           console.log(error)
         })
     },
     nextStory () {
-      axios.post('/api/moveStory')
-      this.getStroy()
+      axios.post('/api/moveStory').then(response => {
+        if (response.data.code === 200) {
+          this.$router.replace({
+            path: '/loading', // 空白页的路由地址
+            name: 'Loading'
+          })
+        }
+      }
+      )
+      // this.getStroy()
     }
   },
   mounted () {

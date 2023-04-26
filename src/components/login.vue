@@ -1,5 +1,6 @@
 <template>
-    <div class="login-register">
+    <div class="login-register" @click="playbgm()">
+      <!-- <bgm /> -->
       <div class="tab">
         <span class="tab-item" :class="{ active: activeTab === 'login' }" @click="changeTab('login')"><h2>登录</h2></span>
         <span class="tab-item" :class="{ active: activeTab === 'register' }" @click="changeTab('register')"><h2>注册</h2></span>
@@ -32,6 +33,7 @@
 <script>
 import axios from 'axios'
 import AddStory from '../pages/addStory.vue'
+import bgm from '../components/bgm.vue'
 
 export default {
   name: 'Login',
@@ -49,7 +51,8 @@ export default {
     }
   },
   components: {
-    AddStory
+    AddStory,
+    bgm
   },
   methods: {
     changeTab (tab) {
@@ -78,6 +81,7 @@ export default {
         .then(response => {
           if (response.data.code === 200) {
             localStorage.setItem('token', response.data)
+            alert('注册成功')
             this.$router.push({ name: 'main' })
           } else {
             alert('注册失败')

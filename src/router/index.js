@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import login from '../components/login.vue'
 import mainPage from '../pages/mainPage.vue'
 import addStory from '../pages/addStory.vue'
+import loading from '../pages/loading.vue'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: login
+  },
+  {
+    path: '/loading',
+    name: 'Loading',
+    component: loading
   },
   {
     path: '/main',
